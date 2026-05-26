@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="tg">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>✨ Cosmic Romance for Parvina ✨</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      overflow: hidden;
+      height: 100vh;
+      background: #020617;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      perspective: 1000px;
+    }
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(219, 39, 119, 0.25), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(99, 102, 241, 0.25), transparent 45%),
+        linear-gradient(135deg, #020617, #0b1329, #1e1b4b, #020617);
+      background-size: 400% 400%;
+      animation: gradientBG 20s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    
+    .star {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 4px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(255,255,255,0.1), 0 0 0 8px rgba(255,255,255,0.1), 0 0 20px rgba(255,255,255,1);
+      animation: animateStars 4s linear infinite;
+      opacity: 0;
+    }
+    
+    .star::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(90deg, #fff, transparent);
+    }
+
+    @keyframes animateStars {
+      0% { transform: rotate(315deg) translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: rotate(315deg) translateX(-1000px); opacity: 0; }
+    }
+
+    
+    .heart-glow {
+      position: absolute;
+      bottom: -100px;
+      pointer-events: none;
+      animation: flyUp 8s ease-in-out forwards;
+      filter: drop-shadow(0 0 10px rgba(236, 72, 153, 0.6));
+      z-index: 5;
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(0) scale(0.3) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.8; }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(-125vh) scale(1.4) rotate(360deg); opacity: 0; }
+    }
+
+   
+    .cyber-card {
+      background: rgba(8, 10, 24, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(25px);
+      box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.4),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+  
+    .cyber-card::after {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 40px;
+      background: linear-gradient(90deg, #ec4899, #6366f1, #3b82f6, #ec4899);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: cyberGlow 8s linear infinite;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+    }
+
+    .cyber-card:hover::after {
+      opacity: 0.9;
+    }
+
+    @keyframes cyberGlow {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 400% 50%; }
+    }
+
+  
+    .magical-text {
+      background: linear-gradient(30deg, #ffffff 30%, #fbcfe8 50%, #f472b6 70%, #ffffff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% auto;
+      animation: shineText 4s linear infinite;
+      text-shadow: 0 0 30px rgba(236, 72, 153, 0.3);
+    }
+
+    @keyframes shineText {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    
+    .btn-3d {
+      position: relative;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      box-shadow: 0 10px 20px -10px rgba(236, 72, 153, 0.5);
+    }
+
+    .btn-3d:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 20px 30px -10px rgba(236, 72, 153, 0.8);
+    }
+
+    .btn-3d:active {
+      transform: translateY(1px);
+    }
+
+    
+    .wave-circle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: scale(0);
+      animation: ripple 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(2, 6, 23, 0.85);
+      backdrop-filter: blur(15px);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      transform: scale(0.8) translateY(50px);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div id="stars-container"></div>
+  <div id="hearts-container"></div>
+
+
+  <audio id="bg-music" loop>
+    <source src="./src/Wrap Me in Plastic   MOMOLAND   CHROMANCE.m4a" type="audio/mpeg">
+  </audio>
+
+  <button onclick="toggleMusic()" class="absolute top-6 right-6 z-30 flex items-center gap-2 bg-white/5 border border-white/10 backdrop-blur-md text-white px-5 py-2.5 rounded-full hover:bg-white/10 hover:border-pink-500/50 duration-300 group">
+    <span id="music-status" class="w-2 h-2 rounded-full bg-pink-500 animate-ping inline-block"></span>
+    <span id="music-text" class="text-sm font-medium tracking-wide">Мусиқии Ором</span>
+  </button>
+
+ 
+  <div class="relative z-10 flex items-center justify-center h-screen px-4">
+    <div id="main-card" class="cyber-card w-full max-w-2xl rounded-[40px] p-8 md:p-12 text-center">
+      
+  
+      <div class="mb-6 inline-flex items-center gap-2 px-5 py-1.5 rounded-full border border-pink-500/30 text-pink-300 bg-pink-950/20 text-sm tracking-wider uppercase animate-pulse">
+        <span>✨</span> Umrum <span>✨</span>
+      </div>
+
+      <h1 class="magical-text text-6xl md:text-60px font-black tracking-tight mb-6 select-none cursor-default">
+        Parvinam ❤️
+      </h1>
+
+      <p class="text-slate-300 text-lg md:text-xl leading-relaxed max-w-lg mx-auto mb-10 font-light">
+        For you for all of us <br>
+        this is for you my honey...
+      </p>
+
+ 
+      <div class="flex flex-col sm:flex-row gap-5 justify-center items-center">
+        
+        <button onclick="openLoveLetter('tajik', event)" class="btn-3d w-full sm:w-auto bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white font-medium text-lg px-12 py-4 rounded-2xl">
+          Love You 💘
+        </button>
+
+        <button onclick="openLoveLetter('english', event)" class="btn-3d w-full sm:w-auto bg-slate-900/80 border border-white/10 text-slate-200 font-medium text-lg px-12 py-4 rounded-2xl hover:text-white hover:border-white/20">
+          Forever ♾
+        </button>
+
+      </div>
+
+  
+      <div class="mt-12 flex justify-center gap-6 text-3xl opacity-80">
+        <span class="animate-bounce" style="animation-delay: 0s">💖</span>
+        <span class="animate-bounce" style="animation-delay: 0.2s">🌙</span>
+        <span class="animate-bounce" style="animation-delay: 0.4s">✨</span>
+      </div>
+
+    </div>
+  </div>
+
+ 
+  <div id="love-letter-modal" class="modal-overlay">
+    <div class="modal-content cyber-card w-full max-w-xl rounded-[35px] p-8 md:p-10 text-center mx-4 border-pink-500/30">
+      
+      <div class="text-pink-400 text-4xl mb-4 animate-pulse">❤️</div>
+      
+      <h2 id="modal-title" class="magical-text text-3xl md:text-4xl font-extrabold mb-6">
+        To My Forever Love
+      </h2>
+      
+     
+      <div id="modal-body" class="text-slate-200 text-base md:text-lg leading-relaxed text-left space-y-4 font-light max-h-[350px] overflow-y-auto pr-2">
+        
+      </div>
+
+ 
+      <button onclick="closeLoveLetter()" class="mt-8 bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium px-8 py-3 rounded-xl hover:scale-105 duration-300 shadow-lg shadow-pink-500/20">
+        Close with Love 💖
+      </button>
+
+    </div>
+  </div>
+
+  <script>
+    const letters = {
+      tajik: {
+        title: "My love for you 💖",
+        body: `
+          <p>Парвинаи азизам, ҳаёти ман...</p>
+          <p>Агар аз ман бипурсанд, ки зеботарин лаҳзаи зиндагиат кадом аст, ман рӯзеро мегӯям, ки ту вориди дунёи ман шудӣ. Ту барои ман танҳо як шахс нестӣ, ту ҳамон оромиш ва нуре ҳастӣ, ки қалби маро дар ториктарин шабҳо равшан мекунад.</p>
+          <p>Дӯст доштани ту бароям ба мисли нафас кашидан аст — ҳамон қадар табиӣ, ҳамон қадар ҳаётан муҳим. Ҳар сонияе, ки дар бораи ту фикр мекунам, дунё бароям зеботар ва пурмаънотар мешавад. Ту ягона касе ҳастӣ, ки калиди тамоми эҳсосоти маро дар даст дорӣ.</p>
+          <p>Хушбахтии ман дар табассуми туст ва қалби ман то абад танҳо барои ту садо хоҳад дод. Дӯстат медорам, на танҳо бо калимаҳо, балки бо тамоми ҳастиву ҷонам! 💘</p>
+          <p class="text-right text-pink-400 font-normal italic">Бо тамоми ишқу садоқат... 🌹</p>
+        `
+      },
+      english: {
+        title: " My Forever Love ♾️",
+        body: `
+          <p>My Dearest Parvina,</p>
+          <p>In a world full of billions of people, my eyes will always search for you. You are the star that lights up my darkest nights, and the beautiful melody that plays in my heart every single day.</p>
+          <p>Loving you is as natural as breathing, and every moment spent with you feels like a beautiful dream come true. No matter where life takes us, my love for you will remain infinite, constant, and unbreakable.</p>
+          <p>Thank you for being my peace, my joy, and my absolute everything. I choose you today, tomorrow, and for the rest of eternity.</p>
+          <p class="text-right text-pink-400 font-normal italic">Yours Forever & Always... ♾️</p>
+        `
+      }
+    };
+
+    function openLoveLetter(lang, e) {
+      createRipple(e);
+      
+      // Илова кардани матн вобаста ба тугма
+      document.getElementById('modal-title').innerHTML = letters[lang].title;
+      document.getElementById('modal-body').innerHTML = letters[lang].body;
+      
+      document.getElementById('love-letter-modal').classList.add('active');
+      
+      if(lang === 'tajik') {
+        burstHearts(e);
+      }
+    }
+
+    function closeLoveLetter() {
+      document.getElementById('love-letter-modal').classList.remove('active');
+    }
+
+    const heartsContainer = document.getElementById('hearts-container');
+    const emojis = ['❤️', '💖', '💕', '✨', '🌸'];
+
+    function spawnHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart-glow';
+      heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+      heart.style.left = Math.random() * 100 + 'vw';
+      const size = Math.random() * 25 + 15;
+      heart.style.fontSize = size + 'px';
+      const duration = Math.random() * 4 + 6;
+      heart.style.animationDuration = duration + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), duration * 1000);
+    }
+    setInterval(spawnHeart, 600);
+
+    const starsContainer = document.getElementById('stars-container');
+    function spawnShootingStar() {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.top = Math.random() * 40 + 'vh';
+      star.style.left = Math.random() * 80 + 20 + 'vw';
+      star.style.animationDuration = Math.random() * 2 + 2 + 's';
+      starsContainer.appendChild(star);
+      setTimeout(() => star.remove(), 4000);
+    }
+    setInterval(spawnShootingStar, 3000);
+
+
+    function burstHearts(e) {
+      for (let i = 0; i < 20; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart-glow';
+          heart.innerHTML = '💖';
+          heart.style.left = (e.clientX ? e.clientX : window.innerWidth/2) + (Math.random() * 200 - 100) + 'px';
+          heart.style.bottom = '0px';
+          heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+          heart.style.animationDuration = '3s';
+          heartsContainer.appendChild(heart);
+          setTimeout(() => heart.remove(), 3000);
+        }, i * 50);
+      }
+    }
+    function createRipple(e) {
+      const btn = e.currentTarget;
+      const circle = document.createElement('span');
+      const rect = btn.getBoundingClientRect();
+      const x = (e.clientX ? e.clientX : rect.left + rect.width/2) - rect.left;
+      const y = (e.clientY ? e.clientY : rect.top + rect.height/2) - rect.top;
+      circle.className = 'wave-circle';
+      circle.style.left = x + 'px';
+      circle.style.top = y + 'px';
+      btn.appendChild(circle);
+      setTimeout(() => circle.remove(), 600);
+    }
+    const card = document.getElementById('main-card');
+    document.addEventListener('mousemove', (e) => {
+      if (window.innerWidth > 768) {
+        const xAxis = (window.innerWidth / 2 - e.clientX) / 45;
+        const yAxis = (window.innerHeight / 2 - e.clientY) / 45;
+        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+      }
+    });
+    const music = document.getElementById('bg-music');
+    const musicStatus = document.getElementById('music-status');
+    const musicText = document.getElementById('music-text');
+    
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        musicText.innerHTML = 'I love you';
+        musicStatus.classList.remove('bg-gray-500');
+        musicStatus.classList.add('bg-pink-500');
+      } else {
+        music.pause();
+        musicText.innerHTML = 'Мусиқӣ Хомӯш';
+        musicStatus.classList.remove('bg-pink-500');
+        musicStatus.classList.add('bg-gray-500');
+      }
+    }
+  </script>
+</body>
+</html>
